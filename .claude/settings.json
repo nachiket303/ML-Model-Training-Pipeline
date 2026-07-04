@@ -18,7 +18,11 @@
       "Bash(.venv/Scripts/python.exe -m pytest)",
       "Bash(.venv/Scripts/python.exe -m black --check .)",
       "Bash(git commit -q -m 'Stage 6: Typer CLI, test suite, CI workflow, error-handling pass *)",
-      "Bash(git commit -q -m 'Stage 7: comprehensive README with production framing *)"
+      "Bash(git commit -q -m 'Stage 7: comprehensive README with production framing *)",
+      "Bash(rm -rf artifacts mlflow.db mlartifacts)",
+      "Bash(.venv/Scripts/python.exe -m black .)",
+      "Bash(.venv/Scripts/python.exe -m pytest -q)",
+      "Bash(git commit *)"
     ]
   }
 }

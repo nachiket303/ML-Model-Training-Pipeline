@@ -70,8 +70,10 @@ def test_search_sees_only_training_data(config_path: Path, monkeypatch: pytest.M
     seen_row_counts: list[int] = []
     original_fit = GridSearchCV.fit
 
-    def spy_fit(self: GridSearchCV, features, target=None, **kwargs):  # type: ignore[no-untyped-def]
-        seen_row_counts.append(len(features))
+    def spy_fit(
+        self: GridSearchCV, features: object, target: object = None, **kwargs: object
+    ) -> GridSearchCV:
+        seen_row_counts.append(len(features))  # type: ignore[arg-type]
         return original_fit(self, features, target, **kwargs)
 
     monkeypatch.setattr(GridSearchCV, "fit", spy_fit)
