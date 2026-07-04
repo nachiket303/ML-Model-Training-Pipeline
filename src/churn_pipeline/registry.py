@@ -36,6 +36,7 @@ logger = logging.getLogger(__name__)
 
 _MODEL_FILENAME = "model.joblib"
 _METADATA_FILENAME = "metadata.json"
+_RUNS_DIRNAME = "runs"
 _HASH_CHUNK_BYTES = 1 << 20  # read files in 1 MiB chunks when hashing
 
 
@@ -192,6 +193,27 @@ def save_artifact(
     )
     logger.info("Saved artifact for '%s' -> %s", metadata["model_name"], version_dir)
     return version_dir
+
+
+def save_run_summary(artifacts_root: Path, summary: dict[str, Any]) -> Path:
+    """Persist a cross-model comparison summary for one pipeline run.
+
+    Written to ``artifacts/runs/<version>_summary.json`` so a run's model ranking and winner are
+    recorded alongside (but separate from) the per-model artifacts.
+
+    Args:
+        artifacts_root: Root artifacts directory.
+        summary: Comparison summary dict (must contain a ``version`` key).
+
+    Returns:
+        The path the summary was written to.
+    """
+    runs_dir = Path(artifacts_root) / _RUNS_DIRNAME
+    runs_dir.mkdir(parents=True, exist_ok=True)
+    summary_path = runs_dir / f"{summary['version']}_summary.json"
+    summary_path.write_text(json.dumps(summary, indent=2, default=_json_default), encoding="utf-8")
+    logger.info("Saved run comparison summary -> %s", summary_path)
+    return summary_path
 
 
 def list_versions(artifacts_root: Path, model_name: str) -> list[str]:

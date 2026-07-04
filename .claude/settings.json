@@ -8,7 +8,12 @@
       "Bash(.venv/Scripts/python.exe -m black . -q)",
       "Bash(.venv/Scripts/python.exe -m ruff check .)",
       "Bash(git add *)",
-      "Bash(git commit -q -m 'Stage 3: preprocessing \\(ColumnTransformer\\), model factory, evaluation metrics *)"
+      "Bash(git commit -q -m 'Stage 3: preprocessing \\(ColumnTransformer\\), model factory, evaluation metrics *)",
+      "Bash(rm -rf artifacts)",
+      "Bash(.venv/Scripts/python.exe -c ' *)",
+      "Bash(rm -rf _mltest)",
+      "Bash(rm -rf artifacts mlflow.db mlartifacts mlruns _mltest)",
+      "Bash(git commit -q -m 'Stage 5: tuning \\(nested CV, no leakage\\), model comparison, optional MLflow *)"
     ]
   }
 }

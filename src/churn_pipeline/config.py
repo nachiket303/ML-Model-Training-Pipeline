@@ -91,6 +91,10 @@ class TrackingConfig(BaseModel):
 
     mlflow: bool = False
     experiment_name: str = "telco-churn"
+    # Explicit MLflow backend so runs are reproducible and viewable via
+    # `mlflow ui --backend-store-uri <this>`. A DB store is used because MLflow's file store is
+    # deprecated. Kept in config so nothing points at a hardcoded path in logic.
+    tracking_uri: str = "sqlite:///mlflow.db"
 
 
 class ArtifactsConfig(BaseModel):

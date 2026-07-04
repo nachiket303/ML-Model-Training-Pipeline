@@ -16,8 +16,10 @@ venv/
 # Pipeline outputs (versioned model artifacts + run summaries are reproducible from config)
 artifacts/
 
-# MLflow local tracking store
+# MLflow local tracking store (DB backend + artifact store; file store is deprecated)
 mlruns/
+mlartifacts/
+mlflow.db
 
 # OS / editor
 .DS_Store

@@ -1,0 +1,64 @@
+# Example configuration exercising the hyperparameter-search path with small grids.
+# Use with: churn-train --config config/tuning_example.yaml
+# Identical to default.yaml except tuning is enabled and grids/folds are kept small so the
+# nested-CV search finishes quickly during a demo.
+
+seed: 42
+
+data:
+  path: data/Telco_Customer_Churn_Dataset.csv
+  target: Churn
+  id_columns:
+    - customerID
+  positive_label: "Yes"
+  numeric_coerce_columns:
+    - TotalCharges
+  numeric_fill: 0.0
+
+split:
+  test_size: 0.2
+  stratify: true
+
+cross_validation:
+  enabled: true
+  folds: 3 # smaller than default (5) to keep the search fast
+
+tuning:
+  enabled: true
+  method: grid
+  scoring: roc_auc
+  n_iter: 10
+  param_grids:
+    logistic_regression:
+      model__C: [0.1, 1.0]
+    random_forest:
+      model__n_estimators: [100, 200]
+      model__max_depth: [null, 10]
+    gradient_boosting:
+      model__n_estimators: [50, 100]
+      model__learning_rate: [0.1]
+
+models:
+  - name: logistic_regression
+    params:
+      max_iter: 1000
+      C: 1.0
+  - name: random_forest
+    params:
+      n_estimators: 300
+      max_depth: null
+  - name: gradient_boosting
+    params:
+      n_estimators: 200
+      learning_rate: 0.1
+
+evaluation:
+  primary_metric: roc_auc
+
+tracking:
+  mlflow: false
+  experiment_name: telco-churn
+  tracking_uri: "sqlite:///mlflow.db"
+
+artifacts:
+  root: artifacts

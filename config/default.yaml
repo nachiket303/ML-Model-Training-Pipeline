@@ -36,7 +36,6 @@ tuning:
   param_grids:
     logistic_regression:
       model__C: [0.1, 1.0, 10.0]
-      model__penalty: ["l2"]
     random_forest:
       model__n_estimators: [200, 400]
       model__max_depth: [null, 10, 20]
@@ -68,6 +67,8 @@ evaluation:
 tracking:
   mlflow: false
   experiment_name: telco-churn
+  # View logged runs with: mlflow ui --backend-store-uri sqlite:///mlflow.db
+  tracking_uri: "sqlite:///mlflow.db"
 
 artifacts:
   root: artifacts
