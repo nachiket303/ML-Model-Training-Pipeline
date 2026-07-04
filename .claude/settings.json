@@ -17,7 +17,8 @@
       "Bash(.venv/Scripts/churn-train.exe --help)",
       "Bash(.venv/Scripts/python.exe -m pytest)",
       "Bash(.venv/Scripts/python.exe -m black --check .)",
-      "Bash(git commit -q -m 'Stage 6: Typer CLI, test suite, CI workflow, error-handling pass *)"
+      "Bash(git commit -q -m 'Stage 6: Typer CLI, test suite, CI workflow, error-handling pass *)",
+      "Bash(git commit -q -m 'Stage 7: comprehensive README with production framing *)"
     ]
   }
 }
