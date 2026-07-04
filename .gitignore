@@ -1,0 +1,25 @@
+# Build / packaging
+*.egg-info/
+build/
+dist/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Pipeline outputs (versioned model artifacts + run summaries are reproducible from config)
+artifacts/
+
+# MLflow local tracking store
+mlruns/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,73 @@
+# Default pipeline configuration.
+# Everything the pipeline does is driven from this file — no paths, columns, or
+# hyperparameters are hardcoded in logic. Override with --config or --data on the CLI.
+
+# Global random seed threaded through split, models, and CV for reproducibility.
+seed: 42
+
+data:
+  path: data/Telco_Customer_Churn_Dataset.csv
+  target: Churn
+  id_columns:
+    - customerID
+  # Raw label that maps to the positive class (1). Everything else maps to 0.
+  positive_label: "Yes"
+  # TotalCharges ships as strings with blanks for tenure=0 accounts; coerce to numeric and
+  # fill those structural blanks with 0 (a new account has genuinely accrued no charges).
+  numeric_coerce_columns:
+    - TotalCharges
+  numeric_fill: 0.0
+
+split:
+  test_size: 0.2
+  stratify: true # preserve the ~26.5% churn rate in both train and test
+
+cross_validation:
+  enabled: true
+  folds: 5
+
+tuning:
+  enabled: false # core path; flip to true (or use config/tuning_example.yaml) for search
+  method: grid # grid | random
+  scoring: roc_auc # sklearn scoring string used to select the best estimator
+  n_iter: 10 # number of sampled configs when method == random
+  # Per-model search grids. Keys are prefixed `model__` because the estimator handed
+  # to the search is a Pipeline whose model step is named "model".
+  param_grids:
+    logistic_regression:
+      model__C: [0.1, 1.0, 10.0]
+      model__penalty: ["l2"]
+    random_forest:
+      model__n_estimators: [200, 400]
+      model__max_depth: [null, 10, 20]
+    gradient_boosting:
+      model__n_estimators: [100, 200]
+      model__learning_rate: [0.05, 0.1]
+
+# Model types to train. Each is built by the factory in models.py and receives the
+# global seed automatically. Base params here are used when tuning is disabled and as
+# the starting point the search overrides per fold.
+models:
+  - name: logistic_regression
+    params:
+      max_iter: 1000
+      C: 1.0
+  - name: random_forest
+    params:
+      n_estimators: 300
+      max_depth: null
+  - name: gradient_boosting
+    params:
+      n_estimators: 200
+      learning_rate: 0.1
+
+evaluation:
+  # Metric used to rank models in the comparison table and pick the winner.
+  primary_metric: roc_auc
+
+tracking:
+  mlflow: false
+  experiment_name: telco-churn
+
+artifacts:
+  root: artifacts

@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "telco-churn-pipeline"
+version = "0.1.0"
+description = "Config-driven ML training pipeline for Telco customer churn (Sky UK MLE challenge, Option 1)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Nachiket" }]
+
+# Abstract (lower-bound) dependencies for the installable package.
+# Concrete, fully-pinned versions used for reproducible runs live in requirements.txt.
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=2.1",
+    "scikit-learn>=1.6",
+    "joblib>=1.4",
+    "pyyaml>=6.0",
+    "pydantic>=2.10",
+    "typer>=0.15",
+    "mlflow>=3.0",
+    "pyarrow>=18.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "black>=24.10",
+    "ruff>=0.8",
+]
+
+[project.scripts]
+# Single command the interviewer runs in the demo: `churn-train --config config/default.yaml`
+churn-train = "churn_pipeline.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+# A pragmatic, defensible rule set: pyflakes (F), pycodestyle (E/W), isort (I),
+# pep8-naming (N), pyupgrade (UP), flake8-bugbear (B), comprehensions (C4).
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q"
+pythonpath = ["src"]
