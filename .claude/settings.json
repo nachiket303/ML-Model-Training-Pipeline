@@ -13,7 +13,11 @@
       "Bash(.venv/Scripts/python.exe -c ' *)",
       "Bash(rm -rf _mltest)",
       "Bash(rm -rf artifacts mlflow.db mlartifacts mlruns _mltest)",
-      "Bash(git commit -q -m 'Stage 5: tuning \\(nested CV, no leakage\\), model comparison, optional MLflow *)"
+      "Bash(git commit -q -m 'Stage 5: tuning \\(nested CV, no leakage\\), model comparison, optional MLflow *)",
+      "Bash(.venv/Scripts/churn-train.exe --help)",
+      "Bash(.venv/Scripts/python.exe -m pytest)",
+      "Bash(.venv/Scripts/python.exe -m black --check .)",
+      "Bash(git commit -q -m 'Stage 6: Typer CLI, test suite, CI workflow, error-handling pass *)"
     ]
   }
 }
