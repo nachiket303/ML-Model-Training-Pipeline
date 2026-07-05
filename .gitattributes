@@ -1,5 +1,0 @@
-# Normalise line endings to LF in the repository so black/ruff behave identically on
-# Windows (local build) and Linux (CI). Prevents CRLF-vs-LF check failures.
-* text=auto eol=lf
-*.png binary
-*.parquet binary

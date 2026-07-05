@@ -27,7 +27,7 @@ cross_validation:
   folds: 5
 
 tuning:
-  enabled: false # core path; flip to true (or use config/tuning_example.yaml) for search
+  enabled: true # core path; flip to true (or use config/tuning_example.yaml) for search
   method: grid # grid | random
   scoring: roc_auc # sklearn scoring string used to select the best estimator
   n_iter: 10 # number of sampled configs when method == random
@@ -65,7 +65,7 @@ evaluation:
   primary_metric: roc_auc
 
 tracking:
-  mlflow: false
+  mlflow: True
   experiment_name: telco-churn
   # View logged runs with: mlflow ui --backend-store-uri sqlite:///mlflow.db
   tracking_uri: "sqlite:///mlflow.db"
