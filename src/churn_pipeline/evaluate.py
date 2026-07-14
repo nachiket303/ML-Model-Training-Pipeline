@@ -1,6 +1,6 @@
 """Evaluation metrics.
 
-Churn is a mildly imbalanced problem (~26.5% positive), so accuracy alone is misleading — a model
+Churn is a mildly imbalanced problem (~26.5% positive), so accuracy alone is misleading a model
 predicting "never churns" would score ~73%. We therefore report precision, recall, f1, and roc_auc
 alongside accuracy. roc_auc is computed from predicted probabilities (not hard labels), because it
 measures ranking quality across all thresholds; the estimator is asserted to support

@@ -1,6 +1,6 @@
 """Command-line entry point.
 
-The single command an interviewer runs in the demo: ``churn-train --config config/default.yaml``.
+The single command runs in the demo: ``churn-train --config config/default.yaml``.
 It configures logging once, logs the environment for reproducibility, optionally overrides the
 dataset path (so the exact same tool works on any dataset, not just Telco), runs the pipeline, and
 prints the run summary. Expected boundary errors (bad config, bad data) are reported as a clean

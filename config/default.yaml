@@ -1,6 +1,6 @@
 # Default pipeline configuration.
-# Everything the pipeline does is driven from this file — no paths, columns, or
-# hyperparameters are hardcoded in logic. Override with --config or --data on the CLI.
+# Everything the pipeline does is driven from this file — no paths, columns or
+# hyperparameters are hardcoded in logic.
 
 # Global random seed threaded through split, models, and CV for reproducibility.
 seed: 42
@@ -20,19 +20,19 @@ data:
 
 split:
   test_size: 0.2
-  stratify: true # preserve the ~26.5% churn rate in both train and test
+  stratify: true # preserve the equal % churn rate in both train and test
 
 cross_validation:
   enabled: true
   folds: 5
 
 tuning:
-  enabled: true # run hyperparameter search for each model
-  method: grid # grid | random
-  scoring: roc_auc # sklearn scoring string used to select the best estimator
+  enabled: true #run hyperparameter search for each model
+  method: grid #grid | random
+  scoring: roc_auc #sklearn scoring string used to select the best estimator
   n_iter: 10 # number of sampled configs when method == random
-  # Per-model search grids. Keys are prefixed `model__` because the estimator handed
-  # to the search is a Pipeline whose model step is named "model".
+
+  # Grid of hyperparameters to search for each model.
   param_grids:
     logistic_regression:
       model__C: [0.1, 1.0, 10.0]
@@ -61,13 +61,13 @@ models:
       learning_rate: 0.1
 
 evaluation:
-  # Metric used to rank models in the comparison table and pick the winner.
+  # Metric used to rank models in the comparison table
   primary_metric: roc_auc
 
 tracking:
   mlflow: True
   experiment_name: telco-churn
-  # View logged runs with: mlflow ui --backend-store-uri sqlite:///mlflow.db
+  # View logged runs with: mlflow ui
   tracking_uri: "sqlite:///mlflow.db"
 
 artifacts:

@@ -34,7 +34,7 @@ def log_model_run(
     never fail the training run itself.
 
     Args:
-        tracking_uri: MLflow backend store URI (e.g. ``sqlite:///mlflow.db``).
+        tracking_uri: MLflow backend store URI
         experiment_name: MLflow experiment to log under.
         model_name: Name used as the run name and logged model artifact path.
         params: Hyperparameters to log (tuned best params, or the model's base params).

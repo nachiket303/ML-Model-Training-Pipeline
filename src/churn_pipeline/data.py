@@ -6,8 +6,8 @@ place allowed to know about file formats, identifier columns, and dataset-specif
 validates hard and fails fast, because a silent data problem is far more expensive than a loud
 one.
 
-Deliberate data-quality decision (Telco ``TotalCharges``): the column ships as strings with
-blank/whitespace values for accounts whose ``tenure`` is 0. Those rows are genuinely new
+Deliberate data-quality decision (Telco): the column ships as strings with
+blank/whitespace values for accounts whose tenure is 0. Those rows are genuinely new
 customers that have accrued no charges yet, so a blank means *zero*, not *unknown*. We therefore
 coerce the column to numeric and fill the resulting NaNs with the configured ``numeric_fill``
 (0.0 for this dataset) rather than leaving them for the preprocessing median-imputer, which would

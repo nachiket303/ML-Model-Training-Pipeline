@@ -1,8 +1,7 @@
 """Training strategies: tuning and cross-validation.
 
 This module contains the three mutually exclusive ways a single model is trained. The branch is
-chosen by config and is deliberately explicit and flat, because "how did we train and where could
-leakage sneak in?" is the first question an interviewer (or reviewer) asks.
+chosen by config and is deliberately explicit and flat.
 
 The three paths, all of which touch only the training split:
 
@@ -10,7 +9,7 @@ The three paths, all of which touch only the training split:
 2. ``cross_validation.enabled`` (no tuning) -> plain stratified k-fold CV, then fit on full train.
 3. neither                                  -> a single fit on the full training split.
 
-No-leakage guarantee: in paths (1) and (2) the estimator passed to the search / cross-validator is
+No-leakage: in paths (1) and (2) the estimator passed to the search / cross-validator is
 the *entire* preprocessing+model Pipeline. scikit-learn therefore re-fits the imputers, scaler, and
 one-hot encoder on each fold's training portion only — validation-fold statistics never leak into
 fitting. The held-out test set is never passed to this module; the orchestrator evaluates the
