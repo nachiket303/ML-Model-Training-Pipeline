@@ -5,9 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "telco-churn-pipeline"
 version = "0.1.0"
-description = "Config-driven ML training pipeline for Telco customer churn (Sky UK MLE challenge, Option 1)."
+description = "Config-driven ML training pipeline for Telco customer churn."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13.1"
 license = { text = "MIT" }
 authors = [{ name = "Nachiket" }]
 
