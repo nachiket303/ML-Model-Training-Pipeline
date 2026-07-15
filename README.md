@@ -271,7 +271,6 @@ More specific technical steps:
 
 ```
 telco-churn-pipeline/
-├── CLAUDE.md                     # engineering context used during the build
 ├── README.md
 ├── pyproject.toml                # installable package (src layout) + black/ruff/pytest config
 ├── requirements.txt              # pinned reproducibility lock
