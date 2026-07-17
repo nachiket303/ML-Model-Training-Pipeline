@@ -125,7 +125,16 @@ pip install -r requirements.txt
 pip install -e .
 
 # 3. Run the pipeline
-churn-train --config config/default.yaml
+# Format the code (automatically fixes code style)
+.venv/Scripts/python.exe -m black .
+# Check code quality (finds unused imports, errors, and style issues)
+.venv/Scripts/python.exe -m ruff check .
+# Run all unit tests
+.venv/Scripts/python.exe -m pytest
+# Train the churn prediction model using the default configuration
+.venv/Scripts/churn-train.exe --config config/default.yaml
+# (Optional) Start the MLflow UI to view experiment tracking
+.venv/Scripts/mlflow.exe ui --backend-store-uri sqlite:///mlflow.db
 ```
 
 ### One block, start to finish
